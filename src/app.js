@@ -21,14 +21,16 @@ function generatorDomainName(pronoun, adj, noun, extension) {
   return domain;
 }
 
-function domainHTML(obj, htmlID) {
-  let htmlElement = document.getElementById(htmlID);
-  htmlElement.innerHTML = obj[htmlID].join("<br>");
-}
+window.onload = () => {
+  let domainObject = generatorDomainName(pronoun, adj, noun, extension);
+  let domainString = "";
 
-domainHTML(generatorDomainName, "com");
-domainHTML(generatorDomainName, "net");
-domainHTML(generatorDomainName, "org");
-domainHTML(generatorDomainName, "edu");
-domainHTML(generatorDomainName, "info");
-domainHTML(generatorDomainName, "biz");
+  for (let ext in domainObject) {
+    domainString += `<h4>${ext}</h4>`;
+    domainObject[ext].forEach(domain => {
+      domainString += `<p>${domain}</p>`;
+    });
+  }
+
+  document.querySelector("#domain").innerHTML = domainString;
+};
